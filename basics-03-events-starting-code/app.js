@@ -9,6 +9,9 @@ const app = Vue.createApp({
     add(value) {
       this.counter = this.counter + value;
     },
+    outpuFullName() {
+      
+    },
     reduce(value) {
       this.counter = this.counter - value;
     },
@@ -22,6 +25,11 @@ const app = Vue.createApp({
     submitForm() {
       alert("Submited!");
     }
+  },
+  computed: {
+    fullName() {
+      return this.name === "" ? "" : this.name + " " + "Fotso";
+    },
   },
 });
 
