@@ -9,15 +9,16 @@
 
 <script>
 export default {
+    props: ['friend'],
     data() {
         return {
             toggle: false,
-            friend: {
-                id: "2",
-                name: "Marie Ange",
-                phone: "+237 674 888 888",
-                email: "mariea@yahoo.com"
-            }
+            // friend: {
+            //     id: "2",
+            //     name: "Marie Ange",
+            //     phone: "+237 674 888 888",
+            //     email: "mariea@yahoo.com"
+            // }
         };
     },
     methods: {
