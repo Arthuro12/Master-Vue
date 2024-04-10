@@ -1,15 +1,19 @@
 <template>
     <section>
-        <h2>My Friends</h2>
-        <ul v-for="friend in friends">
-            <li>Name: {{ friend.name }}</li>
-            <li>Phone: {{ friend.phone }}</li>
-            <li>E-Mail: {{ friend.email }}</li>
+        <header>
+            <h1>My Friends</h1>
+        </header>
+        <ul>
+            <li>
+                <friend-contact></friend-contact>
+            </li>
         </ul>
     </section>
 </template>
 
 <script>
+import FriendContact from './components/FriendContact.vue';
+
 export default {
     data() {
         return {
@@ -31,3 +35,7 @@ export default {
     }
 };
 </script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+</style>
