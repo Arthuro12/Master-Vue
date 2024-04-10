@@ -1,5 +1,6 @@
 <template>
-    <h2>{{ friend.name }}</h2>
+    <h2>{{ friend.name }} {{ friend.isFavorite ? "(Favorite)" : "" }}</h2>
+    <button type="button" @click="toggleFavorite">Toggle favorite</button>
     <button type="button" @click="toggleDetails">{{ toggle ? "Hide" : "Show" }} Details</button>
     <ul v-show="toggle">
         <li><strong>Phone:</strong> {{ friend.phone }}</li>
@@ -9,7 +10,12 @@
 
 <script>
 export default {
-    props: ['friend'],
+    props: {
+        friend: {
+            type: Object,
+            required: true
+        }
+    },
     data() {
         return {
             toggle: false,
@@ -24,6 +30,9 @@ export default {
     methods: {
         toggleDetails() {
             this.toggle = !this.toggle;
+        },
+        toggleFavorite() {
+            this.friend.isFavorite = !this.friend.isFavorite;
         }
     }
 };

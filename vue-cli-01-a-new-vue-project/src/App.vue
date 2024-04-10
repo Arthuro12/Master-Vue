@@ -34,7 +34,8 @@ export default {
                     id: "2",
                     name: "Marie Ange",
                     phone: "+237 674 888 888",
-                    email: "mariea@yahoo.com"
+                    email: "mariea@yahoo.com",
+                    isFavorite: true
                 }
             ]
         };
