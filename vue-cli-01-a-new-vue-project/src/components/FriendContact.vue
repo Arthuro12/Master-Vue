@@ -24,6 +24,17 @@ export default {
             required: true
         }
     },
+    emits: ['toggle-favorite'],
+    // emits: {
+    //     'toggle-favorite': function(id) {
+    //         if (id != null) {
+    //             return true;
+    //         } else {
+    //             console.log("Id is missing!")
+    //             return false;
+    //         }
+    //     }
+    },
     data() {
         return {
             toggle: false,
