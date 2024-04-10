@@ -5,7 +5,7 @@
         </header>
         <ul v-for="friend in friends" :key="friend.id">
             <li>
-                <friend-contact :friend="friend"></friend-contact>
+                <friend-contact :friend="friend" :is-favorite="friend.isFavorite" :id="friend.id" @toggle-favorite="toggleFavoriteStatus"></friend-contact>
             </li>
         </ul>
     </section>
@@ -17,18 +17,13 @@ import FriendContact from './components/FriendContact.vue';
 export default {
     data() {
         return {
-            // friend: {
-            //     id: "2",
-            //     name: "Marie Ange",
-            //     phone: "+237 674 888 888",
-            //     email: "mariea@yahoo.com"
-            // },
             friends: [
                 {
                     id: "1",
                     name: "Jean Tabi",
                     phone: "+237 689 888 888",
-                    email: "jt@yahoo.com"
+                    email: "jt@yahoo.com",
+                    isFavorite: true
                 },
                 {
                     id: "2",
@@ -39,6 +34,14 @@ export default {
                 }
             ]
         };
+    },
+    methods: {
+        toggleFavoriteStatus(id) {
+            const identifiedFriend = this.friends.find((currFriend) => {
+                return currFriend.id === id;
+            });
+            identifiedFriend.isFavorite = !identifiedFriend.isFavorite;
+        }
     }
 };
 </script>

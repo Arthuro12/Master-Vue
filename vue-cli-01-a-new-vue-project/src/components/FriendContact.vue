@@ -1,5 +1,5 @@
 <template>
-    <h2>{{ friend.name }} {{ friend.isFavorite ? "(Favorite)" : "" }}</h2>
+    <h2>{{ friend.name }} {{ isFavorite ? "(Favorite)" : "" }}</h2>
     <button type="button" @click="toggleFavorite">Toggle favorite</button>
     <button type="button" @click="toggleDetails">{{ toggle ? "Hide" : "Show" }} Details</button>
     <ul v-show="toggle">
@@ -11,20 +11,22 @@
 <script>
 export default {
     props: {
+        id: {
+            type: String,
+            required: true
+        },
         friend: {
             type: Object,
+            required: true
+        }, 
+        isFavorite: {
+            type: Boolean,
             required: true
         }
     },
     data() {
         return {
             toggle: false,
-            // friend: {
-            //     id: "2",
-            //     name: "Marie Ange",
-            //     phone: "+237 674 888 888",
-            //     email: "mariea@yahoo.com"
-            // }
         };
     },
     methods: {
@@ -32,7 +34,7 @@ export default {
             this.toggle = !this.toggle;
         },
         toggleFavorite() {
-            this.friend.isFavorite = !this.friend.isFavorite;
+            this.$emit('toggle-favorite', this.id);
         }
     }
 };
