@@ -6,6 +6,7 @@
         <li><strong>Phone:</strong> {{ friend.phone }}</li>
         <li><strong>E-Mail:</strong> {{ friend.email }}</li>
     </ul>
+    <button type="button" @click="deleteFriend">Delete</button>
 </template>
 
 <script>
@@ -24,7 +25,7 @@ export default {
             required: true
         }
     },
-    emits: ['toggle-favorite'],
+    emits: ['toggle-favorite', 'delete-friend'],
     // emits: {
     //     'toggle-favorite': function(id) {
     //         if (id != null) {
@@ -46,6 +47,9 @@ export default {
         },
         toggleFavorite() {
             this.$emit('toggle-favorite', this.id);
+        },
+        deleteFriend() {
+            this.$emit('delete-friend', this.id);
         }
     }
 };

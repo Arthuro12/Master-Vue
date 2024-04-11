@@ -6,7 +6,7 @@
         <new-friend @add-contact="handleAddContact"/>
         <ul v-for="friend in friends" :key="friend.id">
             <li>
-                <friend-contact :friend="friend" :is-favorite="friend.isFavorite" :id="friend.id" @toggle-favorite="toggleFavoriteStatus" />
+                <friend-contact :friend="friend" :is-favorite="friend.isFavorite" :id="friend.id" @toggle-favorite="toggleFavoriteStatus" @delete-friend="handleDeleteFriend" />
             </li>
         </ul>
     </section>
@@ -45,6 +45,11 @@ export default {
         },
         handleAddContact(friendContact) {
             this.friends.push(friendContact);
+        },
+        handleDeleteFriend(id) {
+            const identifiedFriend = this.friends.find((currFriend) => currFriend.id === id);
+            const identifiedFriendIdx = this.friends.findIndex((currFriend) => currFriend == identifiedFriend);
+            this.friends.splice(identifiedFriendIdx, 1);
         }
     }
 };
