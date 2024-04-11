@@ -2,15 +2,15 @@
     <form>
         <div>
             <label for="name">Name</label>
-            <input type="text" ref="name" name="name" />
+            <input type="text" ref="name" v-model="friendContact.name" name="name" />
         </div>
         <div>
             <label for="name">Phone</label>
-            <input type="tel" ref="phone" name="phone" />
+            <input type="tel" ref="phone" v-model="friendContact.phone" name="phone" />
         </div>
         <div>
             <label for="name">E-Mail</label>
-            <input type="email" ref="email" name="email" />
+            <input type="email" ref="email" v-model="friendContact.email" name="email" />
         </div>
         <div>
             <button type="submit" @click.prevent="addContact()">Add Contact</button>
@@ -36,9 +36,9 @@ export default {
     methods: {
         addContact() {
             this.friendContact.id = new Date().toISOString();
-            this.friendContact.name = this.$refs.name.value;
-            this.friendContact.phone= this.$refs.phone.value;
-            this.friendContact.email = this.$refs.email.value;
+            // this.friendContact.name = this.$refs.name.value;
+            // this.friendContact.phone= this.$refs.phone.value;
+            // this.friendContact.email = this.$refs.email.value;
             this.friendContact.isFavorite = false;
             this.$emit('add-contact', this.friendContact);
         }
