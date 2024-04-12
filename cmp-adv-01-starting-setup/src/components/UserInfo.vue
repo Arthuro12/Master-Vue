@@ -1,20 +1,20 @@
 <template>
   <section>
     <div>
-      <h3>{{ fullName }}</h3>
+      <header>{{ fullName }}</header>
       <base-badge :type="role" :caption="role.toUpperCase()"></base-badge>
     </div>
     <p>{{ infoText }}</p>
   </section>
 </template>
 
-<script>
+<script scoped>
 export default {
   props: ['fullName', 'infoText', 'role'],
 };
 </script>
 
-<style>
+<style scoped>
 section {
   margin: 2rem auto;
   max-width: 30rem;
@@ -23,7 +23,7 @@ section {
   padding: 1rem;
 }
 
-section div {
+section header {
   display: flex;
   justify-content: space-between;
   align-items: center;
