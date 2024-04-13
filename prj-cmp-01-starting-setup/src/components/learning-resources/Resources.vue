@@ -1,8 +1,12 @@
 <template>
     <base-card>
         <component :is="selectedTabTagName"></component>
-        <base-button @click="setSelectedTab('stored-resources')">Stored Resources</base-button>
-        <base-button @click="setSelectedTab('add-resource')">Add Resource</base-button>
+        <base-button @click="setSelectedTab('stored-resources')" :mode="highlightStoredResourcesButton">
+            Stored Resources
+        </base-button>
+        <base-button @click="setSelectedTab('add-resource')" :mode="highlightAddResourceButton">
+            Add Resource
+        </base-button>
     </base-card>
 </template>
 
@@ -17,13 +21,40 @@ export default {
     },
     data() {
         return {
-            selectedTabTagName: 'stored-resources'
+            selectedTabTagName: 'stored-resources',
+            storedResources: [
+                {
+                    id: 'official-guide', 
+                    title: 'Official Guide', 
+                    description: 'The official Vue.js documentation.',
+                    link: 'https://vuejs.org'
+                },
+                {
+                    id: 'google', 
+                    title: 'Google', 
+                    description: 'Learn to google.',
+                    link: 'https://googgle.org'
+                }
+            ]
         };
     },
     methods: {
         setSelectedTab(tagName) {
             this.selectedTabTagName = tagName;
         }
-    }
+    },
+    computed: {
+        highlightStoredResourcesButton() {
+            return this.selectedTabTagName !== 'stored-resources' ? 'flat' : null;
+        },
+        highlightAddResourceButton() {
+            return this.selectedTabTagName !== 'add-resource' ? 'flat' : null;
+        }
+    },
+    provide() {
+        return {
+            resources: this.storedResources
+        };
+    },
 };
 </script>
