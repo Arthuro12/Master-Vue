@@ -1,15 +1,15 @@
 <template>
     <li>
-        <div>
-            <header>
-                <h3>{{ title }}</h3>
-                <button type="button">Delete</button>
-            </header>
-        </div>
-        <p>{{ description }}</p>
-        <nav>
-            <a :href="link" target="_blank">View Resource</a>
-        </nav>
+      <base-card>
+        <header>
+          <h3>{{ title }}</h3>
+          <button type="button">Delete</button>
+        </header>
+       <p>{{ description }}</p>
+       <nav>
+          <a :href="link" target="_blank">View Resource</a>
+       </nav>
+      </base-card>
     </li>
 </template>
 
@@ -24,6 +24,7 @@ export default {
 li {
   margin: auto;
   max-width: 40rem;
+  list-style: none;
 }
 
 header {
