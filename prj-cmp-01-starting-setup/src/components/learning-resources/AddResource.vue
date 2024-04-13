@@ -2,23 +2,36 @@
     <form>
         <div class="form-control">
             <label for="title">Title</label>
-            <input type="text" id="title" name="title" />
+            <input type="text" id="title" name="title" ref="titleInput" />
         </div>
         <div class="form-control">
             <label for="description">Description</label>
-            <textarea type="text" id="description" name="description" rows=""></textarea>
+            <textarea type="text" id="description" name="description" rows="" ref="descriptionArea"></textarea>
         </div>
         <div class="form-control">
             <label for="link">Link</label>
-            <input type="url" id="link" name="link" />
+            <input type="url" id="link" name="link" ref="linkInput" />
         </div>
         <div>
-            <base-button buttonType="button">Add Resource</base-button>
+            <base-button buttonType="button" @click="submitData()">Add Resource</base-button>
         </div>
     </form>
 </template>
 
 <script>
+export default {
+    inject: ['addResource'],
+    methods: {
+        submitData() {
+            const resource = {
+                title: this.$refs.titleInput.value,
+                description: this.$refs.descriptionArea.value,
+                link: this.$refs.linkInput.value
+            };
+            this.addResource(resource);
+        }
+    }
+};
 </script>
 
 <style scoped>

@@ -7,9 +7,6 @@
 <script>
 export default {
     props: ['buttonType', 'mode'],
-    mounted() {
-      console.log(this.buttonType);
-    }
 };
 </script>
 
