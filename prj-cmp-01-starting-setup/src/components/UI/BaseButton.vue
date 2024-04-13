@@ -1,12 +1,15 @@
 <template>
-    <button type="type" :class="mode">
+    <button :type="buttonType" :class="mode">
         <slot></slot>
     </button>
 </template>
 
 <script>
 export default {
-    props: ['type', 'mode'],
+    props: ['buttonType', 'mode'],
+    mounted() {
+      console.log(this.buttonType);
+    }
 };
 </script>
 

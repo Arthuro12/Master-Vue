@@ -1,6 +1,5 @@
 <template>
     <base-card>
-        <component :is="selectedTabTagName"></component>
         <base-button @click="setSelectedTab('stored-resources')" :mode="highlightStoredResourcesButton">
             Stored Resources
         </base-button>
@@ -8,6 +7,7 @@
             Add Resource
         </base-button>
     </base-card>
+    <component :is="selectedTabTagName"></component>
 </template>
 
 <script>
