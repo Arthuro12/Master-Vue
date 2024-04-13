@@ -1,19 +1,15 @@
 <template>
     <ul>
-        <ResourceItem v-for="resource in storedResources" :key="resource.id"
-            :title="resource.title"
-            :description="resource.description"
-            :link="resource.link"
-        />
+        <StoredResources :resources="storedResources" />
     </ul>
 </template>
 
 <script>
-import ResourceItem from './components/learning-resources/ResourceItem.vue';
+import StoredResources from './components/learning-resources/StoredResources.vue';
 
 export default {
     components: {
-        ResourceItem
+        StoredResources
     },
     data() {
         return {
@@ -26,7 +22,7 @@ export default {
                 },
                 {
                     id: 'google', 
-                    title: 'google', 
+                    title: 'Google', 
                     description: 'Learn to google.',
                     link: 'https://googgle.org'
                 }
@@ -35,3 +31,19 @@ export default {
     }
 };
 </script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  margin: 0;
+}
+</style>
