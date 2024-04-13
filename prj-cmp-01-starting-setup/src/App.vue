@@ -1,13 +1,9 @@
 <template>
     <header title="The Learning Resource App"></header>
-    <ul>
-        <stored-resources :resources="storedResources"></stored-resources>
-    </ul>
 </template>
 
 <script>
 import Header from './components/layouts/Header.vue';
-import StoredResources from './components/learning-resources/StoredResources.vue';
 
 export default {
     components: {
