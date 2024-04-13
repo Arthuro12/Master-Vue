@@ -1,5 +1,6 @@
 <template>
     <ResourceItem v-for="resource in resources" :key="resource.id"
+        :id="resource.id"
         :title="resource.title"
         :description="resource.description"
         :link="resource.link"
@@ -13,7 +14,7 @@ export default {
     components: {
         ResourceItem
     },
-    inject: ['resources']
+    inject: ['resources'],
 };
 </script>
 
