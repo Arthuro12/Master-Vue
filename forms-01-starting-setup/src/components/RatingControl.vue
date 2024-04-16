@@ -14,14 +14,22 @@
 
 <script>
 export default{
-    data() {
-        return {
-            activeOption: ''
-        };
+    props: ['modelValue'],
+    emits: ['update:modelValue'],
+    // data() {
+    //     return {
+    //         activeOption: this.modelValue
+    //     };
+    // },
+    computed: {
+        activeOption() {
+            return this.modelValue;
+        }
     },
     methods: {
         activate(option) {
-            this.activeOption = option;
+            // this.activeOption = option;
+            this.$emit('update:modelValue', option);
         }
     }
 };
