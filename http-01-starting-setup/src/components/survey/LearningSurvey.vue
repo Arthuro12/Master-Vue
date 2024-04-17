@@ -60,7 +60,6 @@ export default {
       //   rating: this.chosenRating,
       // });
 
-      let data = null;
       fetch('https://vue-http-demo-f65d9-default-rtdb.firebaseio.com/surveys.json', {
         method: 'POST',
         headers: {
