@@ -6,6 +6,7 @@
         <base-button @click="loadExperiences">Load Submitted Experiences</base-button>
       </div>
       <p v-if="isLoading">Loading...</p>
+      <p v-if="!isLoading && errorMessage !== ''">{{ errorMessage }}</p>
       <p v-else-if="!isLoading && (!results || results.length === 0)">No stored experiences found. Start adding some survey result first.</p>
       <ul v-else-if="!isLoading && results && results.length > 0">
         <survey-result
@@ -29,12 +30,14 @@ export default {
   data() {
     return {
       results: [],
-      isLoading: false
+      isLoading: false,
+      errorMessage: ''
     };
   },
   methods:  {
     loadExperiences() {
       this.isLoading = true;
+      this.errorMessage = '';
       fetch('https://vue-http-demo-f65d9-default-rtdb.firebaseio.com/surveys.json')
         .then((response) => {
           if (response.ok) {
@@ -51,6 +54,12 @@ export default {
           });
         }
         this.results = results;
+      })
+      .catch((error) => {
+        if (error != null) {
+          this.isLoading = false;
+          this.errorMessage = 'Failed to fetch data - please try again later.';
+        }
       });
     }
   },
