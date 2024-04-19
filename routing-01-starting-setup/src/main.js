@@ -10,13 +10,13 @@ import UsersList from './components/users/UsersList.vue';
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        { path: '/', redirect: '/teams' },
+        { name: 'teams', path: '/', redirect: '/teams' },
         // { path: '/teams', component: TeamsList, alias: '/' },
         { 
             path: '/teams', 
             component: TeamsList, 
             children: [
-                { path: ':teamId', component: TeamMembers, props: true }
+                { name: 'team-members', path: ':teamId', component: TeamMembers, props: true }
             ] 
         },
         { path: '/users', component: UsersList },
