@@ -31,7 +31,7 @@ export default {
   methods: {
     loadTeamMembers(teamId) {
       const selectedTeam = this.teams.find((currTeam) => currTeam.id === teamId);
-      const members = selectedTeam.members;
+      const members = selectedTeam?.members;
       const selectedMembers = [];
       for (const member of members) {
         const selectedUser = this.users.find((currUser) => currUser.id === member);
