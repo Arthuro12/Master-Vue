@@ -9,7 +9,7 @@
     </Transition>
     <button @click="toggleParagraph">Toggle Paragraph</button>
   </div>
-  <base-modal @close="hideDialog" v-if="dialogIsVisible">
+  <base-modal @close="hideDialog" :open="dialogIsVisible">
     <p>This is a test dialog!</p>
     <button @click="hideDialog">Close it!</button>
   </base-modal>
@@ -119,6 +119,17 @@ button:active {
   transform: translateY(30px);*/
 }
 
+.modal-enter-from {
+  
+}
+
+.modal-enter-active {
+  /*animation: modal 0.3s ease-out;*/
+}
+
+.modal-enter-to {}
+
+
 @keyframes slide-fade {
   0% {
     transform: translateX(0) scale(1);
@@ -132,4 +143,16 @@ button:active {
     transform: translate(-150px) scale(1);
   }
 }
+
+/*@keyframes modal {
+  from {
+    opacity: 0;
+    transform: translateX(-50px) scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}*/
 </style>
