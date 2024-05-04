@@ -4,7 +4,7 @@
     <button @click="animateBlock">Animate</button>
   </div>
   <div class="container">
-    <Transition name="paragraph">
+    <Transition name="paragraph" @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter" @before-leave="beforeLeave">
       <p v-if="paragraphIsVisible">This is only sometimes visible...</p>
     </Transition>
     <button @click="toggleParagraph">Toggle Paragraph</button>
@@ -35,8 +35,22 @@ export default {
     };
   },
   methods: {
+    afterEnter() {
+      console.log('I´ll be displayed after the transition is done.');
+    },
     animateBlock() {
       this.animatedBlock = true;
+    },
+    beforeEnter(target) {
+      console.log('I´ll be displayed before the transition.');
+      console.log(target);
+    },
+    beforeLeave(target) {
+      console.log('I´ll be displayed before the transition is over.');
+      console.log(target);
+    },
+    enter(target) {
+      console.log('I will be displayed when the transition will be active.');
     },
     hideDialog() {
       this.dialogIsVisible = false;
