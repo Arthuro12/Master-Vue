@@ -4,7 +4,16 @@
     <button @click="animateBlock">Animate</button>
   </div>
   <div class="container">
-    <Transition name="paragraph" @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter" @before-leave="beforeLeave">
+    <Transition name="paragraph" 
+      @before-enter="beforeEnter" 
+      @enter="enter" 
+      @after-enter="afterEnter" 
+      @before-leave="beforeLeave"
+      @leave="leave" 
+      @after-leave="afterLeave"
+      @enter-cancelled="enterCancelled"
+      @leave-cancelled="leaveCancelled"
+    >
       <p v-if="paragraphIsVisible">This is only sometimes visible...</p>
     </Transition>
     <button @click="toggleParagraph">Toggle Paragraph</button>
@@ -30,33 +39,64 @@ export default {
     return { 
       animatedBlock: false,
       dialogIsVisible: false,
+      enterInterval: null,
+      leaveInterval: null,
       usersAreVisible: false,
       paragraphIsVisible: false,
     };
   },
   methods: {
-    afterEnter() {
-      console.log('I´ll be displayed after the transition is done.');
+    afterEnter(target) {
+      console.log('I´ll be displayed after the transition has started.');
     },
+    afterLeave(target) {},
     animateBlock() {
       this.animatedBlock = true;
     },
     beforeEnter(target) {
-      console.log('I´ll be displayed before the transition.');
+      console.log('I´ll be displayed before the transition start.');
       console.log(target);
+      target.style.opacity = 0;
     },
     beforeLeave(target) {
       console.log('I´ll be displayed before the transition is over.');
       console.log(target);
+      target.style.opacity = 1;
     },
-    enter(target) {
+    enter(target, done) {
       console.log('I will be displayed when the transition will be active.');
+      let round = 1;
+      this.enterInterval = setInterval(() => {
+        target.style.opacity = round * 0.1;
+        round++;
+        if (round > 10) {
+          clearInterval(this.enterInterval);
+          done();
+        }
+      }, 20);
+    },
+    enterCancelled() {
+      clearInterval(this.enterInterval);
     },
     hideDialog() {
       this.dialogIsVisible = false;
     },
     hideUsers() {
       this.usersAreVisible = false;
+    },
+    leave(target, done) {
+      let round = 1;
+      this.leaveInterval = setInterval(() =>  {
+        target.style.opacity = 1 - round * 0.1;
+        round++;
+        if (round > 10) {
+          clearInterval(this.leaveInterval);
+          done();
+        }
+      }, 20);
+    },
+    leaveCancelled() {
+      clearInterval(this.leaveInterval);
     },
     showDialog() {
       this.dialogIsVisible = true;
@@ -124,7 +164,7 @@ button:active {
 }
 
 .paragraph-enter-active {
-  animation: slide-fade 0.3s ease-out;
+  /*animation: slide-fade 0.3s ease-out;*/
 }
 
 .paragraph-enter-to {
@@ -138,7 +178,7 @@ button:active {
 }
 
 .paragraph-leave-active {
-  animation: slide-fade 0.3s ease-out;
+  /*animation: slide-fade 0.3s ease-out;*/
 }
 
 .paragraph-leave-to {
