@@ -9,6 +9,12 @@
     </Transition>
     <button @click="toggleParagraph">Toggle Paragraph</button>
   </div>
+  <div class="container">
+    <Transition name="fade-button" mode="out-in">
+      <button @click="showUsers" v-if="!usersAreVisible">Show users</button>
+      <button @click="hideUsers" v-else>Hide users</button>
+    </Transition>
+  </div>
   <base-modal @close="hideDialog" :open="dialogIsVisible">
     <p>This is a test dialog!</p>
     <button @click="hideDialog">Close it!</button>
@@ -24,6 +30,7 @@ export default {
     return { 
       animatedBlock: false,
       dialogIsVisible: false,
+      usersAreVisible: false,
       paragraphIsVisible: false,
     };
   },
@@ -34,12 +41,18 @@ export default {
     hideDialog() {
       this.dialogIsVisible = false;
     },
+    hideUsers() {
+      this.usersAreVisible = false;
+    },
     showDialog() {
       this.dialogIsVisible = true;
     },
+    showUsers() {
+      this.usersAreVisible = true;
+    },
     toggleParagraph() {
       this.paragraphIsVisible = !this.paragraphIsVisible;
-    }
+    },
   },
 };
 </script>
@@ -129,6 +142,24 @@ button:active {
 
 .modal-enter-to {}
 
+.fade-button-enter-from,
+.fade-button-leave-from
+{
+  opacity: 0;
+}
+
+.fade-button-enter-active {
+  transition: opacity 0.3s ease-out;
+}
+
+.fade-button-leave-active {
+  transition: opacity 0.3s ease-in;
+}
+
+.fade-button-enter-to, .fade-button-leave-to
+{
+  opacity: 1;
+}
 
 @keyframes slide-fade {
   0% {
