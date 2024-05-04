@@ -4,7 +4,8 @@
     <button @click="animateBlock">Animate</button>
   </div>
   <div class="container">
-    <Transition name="paragraph" 
+    <Transition 
+      :css="false"
       @before-enter="beforeEnter" 
       @enter="enter" 
       @after-enter="afterEnter" 
