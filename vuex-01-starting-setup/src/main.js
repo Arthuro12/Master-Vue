@@ -6,6 +6,7 @@ import App from './App.vue';
 const store = createStore({
     actions: {
         increment(context) {
+            console.log(context);
             setTimeout(function() {
                 context.commit('increment');
             }, 2000);
