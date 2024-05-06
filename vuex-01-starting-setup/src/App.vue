@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     addOne() {
-      this.$store.dispatch('increment');
+      this.$store.dispatch('counter/increment');
     }
   }
 };
