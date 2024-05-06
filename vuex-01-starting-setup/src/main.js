@@ -4,6 +4,18 @@ import { createStore } from 'vuex';
 import App from './App.vue';
 
 const store = createStore({
+    actions: {
+        increment(context) {
+            setTimeout(function() {
+                context.commit('increment');
+            }, 2000);
+        },
+        increase(context, payload) {
+            setTimeout(function() {
+                context.commit('increase', payload);
+            }, 2000);
+        }
+    },
     state() {
         return {
             counter: 0
