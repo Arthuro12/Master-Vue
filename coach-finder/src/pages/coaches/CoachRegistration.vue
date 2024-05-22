@@ -1,5 +1,3 @@
-<template>
-  <section></section>
-</template>
+<template>Register</template>
 
 <script></script>
