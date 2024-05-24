@@ -1,5 +1,5 @@
 <template>
-  <TheHeader>Finden Sie einen Coach</TheHeader>
+  <TheHeader></TheHeader>
   <router-view></router-view>
 </template>
 
