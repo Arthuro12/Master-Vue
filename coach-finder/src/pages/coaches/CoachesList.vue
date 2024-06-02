@@ -1,12 +1,12 @@
 <template>
   <section>
-    <coach-filter @update-filter="setFilters"></coach-filter>
+    <coach-filter @update-filter="setFilter"></coach-filter>
   </section>
   <section>
     <base-card>
       <div class="controls">
         <base-button :link="false" mode="outline">Refresh</base-button>
-        <base-button :link="true" to="/register">Register as Coach</base-button>
+        <base-button v-if="!isCoach" :link="true" to="/register">Register as Coach</base-button>
       </div>
       <ul v-if="hasCoaches">
         <coach-item
@@ -35,7 +35,7 @@ export default {
   },
   data() {
     return {
-      activeFilters: {
+      activeFilter: {
         frontend: true,
         backend: true,
         career: true
@@ -47,13 +47,13 @@ export default {
       const coaches = this.$store.getters['coaches/coaches']
 
       return coaches.filter((currCoach) => {
-        if (this.activeFilters.frontend && currCoach.areas.includes('frontend')) {
+        if (this.activeFilter.frontend && currCoach.areas.includes('frontend')) {
           return true
         }
-        if (this.activeFilters.backend && currCoach.areas.includes('backend')) {
+        if (this.activeFilter.backend && currCoach.areas.includes('backend')) {
           return true
         }
-        if (this.activeFilters.career && currCoach.areas.includes('career')) {
+        if (this.activeFilter.career && currCoach.areas.includes('career')) {
           return true
         }
 
@@ -62,11 +62,14 @@ export default {
     },
     hasCoaches() {
       return this.$store.getters['coaches/hasCoaches']
+    },
+    isCoach() {
+      return this.$store.getters['coaches/isCoach']
     }
   },
   methods: {
-    setFilters(filters) {
-      this.activeFilters = filters
+    setFilter(filter) {
+      this.activeFilter = filter
     }
   }
 }
