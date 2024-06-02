@@ -9,7 +9,7 @@
     <base-card>
       <header>
         <h2>Interested? Reach out now!</h2>
-        <base-button :link="true" :to="coantactLink">Contact</base-button>
+        <base-button :link="true" :to="contactLink">Contact</base-button>
       </header>
       <router-view></router-view>
     </base-card>
@@ -34,7 +34,7 @@ export default {
     areas() {
       return this.selectedCoach.areas
     },
-    constactLink() {
+    contactLink() {
       return this.$route.path + '/' + this.id + '/contact'
     },
     description() {

@@ -1,3 +1,3 @@
-<template>Coantact a Coach</template>
+<template>Contact a Coach</template>
 
 <script></script>
