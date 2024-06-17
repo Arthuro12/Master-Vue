@@ -26,7 +26,7 @@
         id="description"
         rows="5"
         v-model.trim="description.val"
-        @blur="clearValidity"
+        @blur="clearValidity('description')"
       ></textarea>
       <p v-if="!description.isValid">Description must not be empty.</p>
     </div>
