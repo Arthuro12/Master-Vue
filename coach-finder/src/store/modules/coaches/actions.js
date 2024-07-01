@@ -19,7 +19,8 @@ export default {
       )
 
       if (!response.ok) {
-        throw new Error(response.statusText)
+        const error = new Error(response.statusText || 'Failed to fetch')
+        throw error
       }
 
       // const responseData = await response.json()
