@@ -30,7 +30,11 @@ export default {
       throw error
     }
   },
-  async loadCoaches(context) {
+  async loadCoaches(context, payload) {
+    if (!payload.forceRefres && !context.getters.shouldUpdate) {
+      return
+    }
+
     try {
       const response = await fetch(
         `https://vue-http-demo-fe1bc-default-rtdb.firebaseio.com/coaches.json`
@@ -57,6 +61,7 @@ export default {
       }
 
       context.commit('setCoaches', coaches)
+      context.commit('setFetchTimestamp')
     } catch (error) {
       throw error
     }
