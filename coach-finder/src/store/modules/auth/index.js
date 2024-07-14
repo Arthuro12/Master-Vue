@@ -1,11 +1,13 @@
 import actions from './actions.js'
 import getters from './getters.js'
-import mutations from '../coaches/mutations.js'
+import mutations from './mutations.js'
 
 export default {
   sate() {
     return {
-      userId: 'c3'
+      userId: null,
+      token: null,
+      tokenExpiration: null
     }
   },
   actions,

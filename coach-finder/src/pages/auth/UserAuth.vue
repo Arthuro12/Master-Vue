@@ -3,11 +3,11 @@
     <form @submit.prevent="submitForm">
       <div class="form-control">
         <label for="email">E-Mail</label>
-        <input type="email" id="email" v-model="email" />
+        <input type="email" id="email" v-model.trim="email" />
       </div>
       <div class="form-control">
         <label for="password">Password</label>
-        <input type="password" id="password" v-model="password" />
+        <input type="password" id="password" v-model.trim="password" />
       </div>
       <p v-if="!formIsValid">
         Please enter a valid email and check that password is at least 6 characters long.
@@ -41,9 +41,17 @@ export default {
   methods: {
     submitForm() {
       this.formIsValid = true
-      if (this.email === '' || !this.email.include('@') || this.password.length < 6) {
+      if (this.email === '' || !this.email.includes('@') || this.password.length < 6) {
         this.formIsValid = false
         return
+      }
+
+      if (this.mode === 'login') {
+      } else {
+        this.$store.dispatch('signup', {
+          email: this.email,
+          password: this.password
+        })
       }
     },
     switchAuthMode() {
