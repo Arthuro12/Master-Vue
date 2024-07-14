@@ -17,8 +17,9 @@ export default {
       )
 
       if (!response.ok) {
-        console.log(response.json())
-        const error = new Error(response.statusText || 'Failed to authenticate.')
+        const error = new Error(
+          response.statusText || 'Failed to authenticate. Check your login data.'
+        )
         throw error
       }
 
@@ -29,6 +30,8 @@ export default {
         userId: responseData.localId,
         tokenExpiration: responseData.expiresIn
       })
-    } catch (error) {}
+    } catch (error) {
+      throw error
+    }
   }
 }
