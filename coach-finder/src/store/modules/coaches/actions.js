@@ -9,9 +9,11 @@ export default {
       areas: data.areas
     }
 
+    const token = context.rootGetters.token
+
     try {
       const response = await fetch(
-        `https://vue-http-demo-fe1bc-default-rtdb.firebaseio.com/coaches/${userId}.json`,
+        `https://vue-http-demo-fe1bc-default-rtdb.firebaseio.com/coaches/${userId}.json?auth=${token}`,
         {
           method: 'PUT',
           body: JSON.stringify(coachData)
@@ -22,8 +24,6 @@ export default {
         const error = new Error(response.statusText || 'Failed to fetch')
         throw error
       }
-
-      // const responseData = await response.json()
 
       context.commit('registerCoach', { ...coachData, id: userId })
     } catch (error) {
