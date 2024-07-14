@@ -61,16 +61,23 @@ export default {
 
       this.isLoading = true
 
-      try {
-        if (this.mode === 'login') {
-        } else {
-          await this.$store.dispatch('signup', {
-            email: this.email,
-            password: this.password
-          })
+      const authPayload = {
+        email: this.email,
+        password: this.password
+      }
+
+      if (this.mode === 'login') {
+        try {
+          await this.$store.dispatch('login', authPayload)
+        } catch (error) {
+          this.error = error.message || 'Failed to authenticate, try later.'
         }
-      } catch (error) {
-        this.error = error.message || 'Failed to authenticate, try later.'
+      } else {
+        try {
+          await this.$store.dispatch('signup', authPayload)
+        } catch (error) {
+          this.error = error.message || 'Failed to authenticate, try later.'
+        }
       }
 
       this.isLoading = false
