@@ -64,5 +64,12 @@ export default {
     } catch (error) {
       throw error
     }
+  },
+  logout(context) {
+    context.commit('setUser', {
+      token: null,
+      userId: null,
+      tokenExpiration: null
+    })
   }
 }
