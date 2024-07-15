@@ -66,18 +66,16 @@ export default {
         password: this.password
       }
 
-      if (this.mode === 'login') {
-        try {
+      try {
+        if (this.mode === 'login') {
           await this.$store.dispatch('login', authPayload)
-        } catch (error) {
-          this.error = error.message || 'Failed to authenticate, try later.'
-        }
-      } else {
-        try {
+        } else {
           await this.$store.dispatch('signup', authPayload)
-        } catch (error) {
-          this.error = error.message || 'Failed to authenticate, try later.'
         }
+        const redirectUrl = '/' + (this.$route.query.redirect || 'coaches')
+        this.$router.replace(redirectUrl)
+      } catch (error) {
+        this.error = error.message || 'Failed to authenticate, try later.'
       }
 
       this.isLoading = false
