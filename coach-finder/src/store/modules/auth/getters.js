@@ -7,5 +7,8 @@ export default {
   },
   isAuthenticated(state) {
     return !!state.userId
+  },
+  didLogout(state) {
+    return state.didLogout
   }
 }

@@ -1,4 +1,5 @@
 const API_KEY = 'AIzaSyDCDZpOC7X5Od2yyuAOkxq1a0BIukyTLQA'
+let timer = null
 
 export default {
   async auth(context, payload) {
@@ -8,6 +9,7 @@ export default {
     if (mode === 'signup') {
       url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`
     }
+
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -27,13 +29,20 @@ export default {
 
       const responseData = await response.json()
 
+      const expiresIn = +responseData.expiresIn * 1000
+      const expirationDate = new Date().getTime() + expiresIn
+
       localStorage.setItem('token', responseData.idToken)
       localStorage.setItem('userId', responseData.localId)
+      localStorage.setItem('tokenExpiration', expirationDate)
+
+      timer = setTimeout(() => {
+        context.dispatch('autoLogout')
+      }, expiresIn)
 
       context.commit('setUser', {
         token: responseData.idToken,
-        userId: responseData.localId,
-        tokenExpiration: responseData.expiresIn
+        userId: responseData.localId
       })
     } catch (error) {
       throw error
@@ -42,12 +51,22 @@ export default {
   tryLogin(context) {
     const token = localStorage.getItem('token')
     const userId = localStorage.getItem('userId')
+    const tokenExpiration = localStorage.getItem('tokenExpiration')
+
+    const expiresIn = +tokenExpiration - new Date().getTime()
+
+    if (expiresIn < 0) {
+      return
+    }
+
+    timer = setTimeout(() => {
+      context.dispatch('autoLogout')
+    }, expiresIn)
 
     if (token && userId) {
       context.commit('setUser', {
         token,
-        userId,
-        tokenExpiration: null
+        userId
       })
     }
   },
@@ -64,10 +83,19 @@ export default {
     })
   },
   logout(context) {
+    localStorage.removeItem('token')
+    localStorage.removeItem('userId')
+    localStorage.removeItem('tokenExpiration')
+
+    clearTimeout(timer)
+
     context.commit('setUser', {
       token: null,
-      userId: null,
-      tokenExpiration: null
+      userId: null
     })
+  },
+  autoLogout(context) {
+    context.dispatch('logout')
+    context.commit('didLogout')
   }
 }
