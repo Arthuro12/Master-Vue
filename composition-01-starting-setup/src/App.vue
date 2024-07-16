@@ -5,10 +5,18 @@
 </template>
 
 <script>
+import { ref } from 'vue';
+
 export default {
-  data() {
+  setup() {
+    const userName = ref('Arthur');
+
+    setTimeout(() => {
+      userName.value = 'Billie';
+    }, 2000);
+
     return {
-      userName: 'Maximilian',
+      userName,
     };
   },
 };
