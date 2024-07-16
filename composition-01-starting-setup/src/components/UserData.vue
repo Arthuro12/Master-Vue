@@ -5,12 +5,13 @@
 </template>
 
 <script>
-import { computed } from 'vue';
+import { computed, inject } from 'vue';
 export default {
-  props: ['firstName', 'lastName', 'age'],
+  props: ['firstName', 'lastName'],
   emits: ['refresh-name'],
   setup(props, context) {
     const userName = computed(() => props.firstName + ' ' + props.lastName);
+    const age = inject('age');
 
     function fireUpdateNameEvent() {
       context.emit('refresh-name');
@@ -18,6 +19,7 @@ export default {
 
     return {
       userName,
+      age,
       fireUpdateNameEvent,
     };
   },

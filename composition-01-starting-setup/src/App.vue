@@ -3,7 +3,6 @@
     <user-data
       :firstName="firstName"
       :lastName="lastName"
-      :age="age"
       @refresh-name="updateName"
     />
     <!-- <input type="text" v-model="firstName" />
@@ -37,7 +36,7 @@
 </template>
 
 <script>
-import { computed, reactive, ref, watch } from 'vue';
+import { computed, provide, reactive, ref, watch } from 'vue';
 
 import UserData from './components/UserData.vue';
 
@@ -48,6 +47,7 @@ export default {
   setup() {
     const userName = ref('Arthur');
     const age = ref(28);
+    provide('age', age);
     // const user = ref({
     //   name: 'Arthur',
     //   age: 28,
