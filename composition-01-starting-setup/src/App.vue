@@ -1,18 +1,35 @@
 <template>
   <section class="container">
     <!-- <h2>{{ user.name }}</h2> -->
+    <h2>{{ lastName }}</h2>
     <h2>{{ userName }}</h2>
-    <h3>{{ user.age }}</h3>
+    <h3>{{ age }}</h3>
     <button @click="updateAge">Change age</button>
-    <!-- <input type="text" placeholder="First Name" v-model="user.firstName" />
-    <input type="text" placeholder="Last Name" v-model="user.lastName" /> -->
-    <input type="text" placeholder="First Name" @input="updateFirstName" />
-    <input type="text" placeholder="Last Name" @input="updateLastname" />
+    <input
+      type="text"
+      placeholder="Last Name"
+      ref="inputLastName"
+      @input="setLastname"
+    />
+    <!-- <input
+      type="text"
+      placeholder="First Name"
+      ref="firstName"
+      v-model="firstName"
+    />
+    <input
+      type="text"
+      placeholder="Last Name"
+      ref="lastName"
+      v-model="lastName"
+    /> -->
+    <!-- <input type="text" placeholder="First Name" @input="updateFirstName" />
+    <input type="text" placeholder="Last Name" @input="updateLastname" /> -->
   </section>
 </template>
 
 <script>
-import { reactive, ref, computed } from 'vue';
+import { computed, reactive, ref, watch } from 'vue';
 
 export default {
   setup() {
@@ -23,8 +40,9 @@ export default {
     //   age: 28,
     // });
 
-    const lastName = ref('');
-    const firstName = ref('');
+    const lastName = ref('Grange');
+    // const firstName = ref('Emmanuel');
+    const age = ref(12);
 
     const user = reactive({
       // name: 'Usher',
@@ -33,6 +51,11 @@ export default {
       age: 45,
     });
 
+    const inputLastName = ref(null);
+
+    function setLastname() {
+      lastName.value = lastName.value + inputLastName.value.value;
+    }
     // const user2 = reactive({
     //   name: 'Marco',
     //   age: 27,
@@ -54,28 +77,38 @@ export default {
 
     // const userName = computed(() => user.lastName + ' ' + user.firstName);
 
-    const userName = computed(() => lastName.value + ' ' + firstName.value);
+    // const userName = computed(() => lastName.value + ' ' + firstName.value);
 
     function updateAge() {
-      user.age++;
+      // user.age++;
+      age.value = age.value + 1;
     }
 
-    function updateFirstName(event) {
-      firstName.value = event.target.value;
-    }
+    // watch([lastName, age], (values) => {
+    //   console.log(values);
+    // });
 
-    function updateLastname(event) {
-      lastName.value = event.target.value;
-    }
+    // function updateFirstName(event) {
+    //   firstName.value = event.target.value;
+    // }
+
+    // function updateLastname(event) {
+    //   lastName.value = event.target.value;
+    // }
 
     return {
       // userName,
       // age,
       user,
-      userName,
+      // firstName,
+      lastName,
+      // userName,
+      age,
+      inputLastName,
+      setLastname,
       updateAge,
-      updateFirstName,
-      updateLastname,
+      // updateFirstName,
+      // updateLastname,
       // name: user2Ref.name,
       // age: user2Ref.age,
     };
