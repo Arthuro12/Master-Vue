@@ -1,6 +1,13 @@
 <template>
   <section class="container">
-    <user-data firstName="Marco" lastName="Antonio" :age="age" />
+    <user-data
+      :firstName="firstName"
+      :lastName="lastName"
+      :age="age"
+      @refresh-name="updateName"
+    />
+    <!-- <input type="text" v-model="firstName" />
+    <input type="text" v-model="lastName" /> -->
     <!-- <h2>{{ user.name }}</h2> -->
     <!-- <h2>{{ lastName }}</h2>
     <h2>{{ userName }}</h2>
@@ -47,7 +54,7 @@ export default {
     // });
 
     const lastName = ref('Grange');
-    // const firstName = ref('Emmanuel');
+    const firstName = ref('Emmanuel');
     // const age = ref(12);
 
     const user = reactive({
@@ -90,6 +97,11 @@ export default {
       age.value = age.value + 1;
     }
 
+    function updateName() {
+      firstName.value = '';
+      lastName.value = '';
+    }
+
     // watch([lastName, age], (values) => {
     //   console.log(values);
     // });
@@ -106,13 +118,14 @@ export default {
       userName,
       // age,
       user,
-      // firstName,
+      firstName,
       lastName,
       // userName,
       age,
       inputLastName,
       setLastname,
       updateAge,
+      updateName,
       // updateFirstName,
       // updateLastname,
       // name: user2Ref.name,
