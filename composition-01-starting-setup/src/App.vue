@@ -1,13 +1,18 @@
 <template>
   <section class="container">
-    <h2>{{ user.name }}</h2>
+    <!-- <h2>{{ user.name }}</h2> -->
+    <h2>{{ userName }}</h2>
     <h3>{{ user.age }}</h3>
     <button @click="updateAge">Change age</button>
+    <!-- <input type="text" placeholder="First Name" v-model="user.firstName" />
+    <input type="text" placeholder="Last Name" v-model="user.lastName" /> -->
+    <input type="text" placeholder="First Name" @input="updateFirstName" />
+    <input type="text" placeholder="Last Name" @input="updateLastname" />
   </section>
 </template>
 
 <script>
-import { reactive, ref } from 'vue';
+import { reactive, ref, computed } from 'vue';
 
 export default {
   setup() {
@@ -17,8 +22,14 @@ export default {
     //   name: 'Arthur',
     //   age: 28,
     // });
+
+    const lastName = ref('');
+    const firstName = ref('');
+
     const user = reactive({
-      name: 'Usher',
+      // name: 'Usher',
+      firstName: 'Paul',
+      lastName: 'Laroche',
       age: 45,
     });
 
@@ -41,15 +52,30 @@ export default {
     //   // user2.age = 25;
     // }, 2000);
 
+    // const userName = computed(() => user.lastName + ' ' + user.firstName);
+
+    const userName = computed(() => lastName.value + ' ' + firstName.value);
+
     function updateAge() {
       user.age++;
+    }
+
+    function updateFirstName(event) {
+      firstName.value = event.target.value;
+    }
+
+    function updateLastname(event) {
+      lastName.value = event.target.value;
     }
 
     return {
       // userName,
       // age,
       user,
+      userName,
       updateAge,
+      updateFirstName,
+      updateLastname,
       // name: user2Ref.name,
       // age: user2Ref.age,
     };
