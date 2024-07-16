@@ -1,12 +1,12 @@
 <template>
   <section class="container">
-    <h2>{{ name }}</h2>
-    <h3>{{ age }}</h3>
+    <h2>{{ user.name }}</h2>
+    <h3>{{ user.age }}</h3>
   </section>
 </template>
 
 <script>
-import { reactive, ref, toRefs } from 'vue';
+import { reactive, ref } from 'vue';
 
 export default {
   setup() {
@@ -21,12 +21,12 @@ export default {
       age: 45,
     });
 
-    const user2 = reactive({
-      name: 'Marco',
-      age: 27,
-    });
+    // const user2 = reactive({
+    //   name: 'Marco',
+    //   age: 27,
+    // });
 
-    const user2Ref = toRefs(user2);
+    // const user2Ref = toRefs(user2);
 
     // console.log(user, user2);
 
@@ -34,18 +34,18 @@ export default {
       //userName.value = 'Billie';
       // user.value.name = 'Billie';
       // user.value.age = 21;
-      // user.name = 'Nathy';
-      // user.age = 25;
-      user2.name = 'Nathy';
-      user2.age = 25;
+      user.name = 'Nathy';
+      user.age = 25;
+      // user2.name = 'Nathy';
+      // user2.age = 25;
     }, 2000);
 
     return {
       // userName,
       // age,
-      // user,
-      name: user2Ref.name,
-      age: user2Ref.age,
+      user,
+      // name: user2Ref.name,
+      // age: user2Ref.age,
     };
   },
 };
