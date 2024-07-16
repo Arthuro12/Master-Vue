@@ -42,7 +42,7 @@ export default {
     const availableUsers = computed(() => {
       let users = [];
       if (activeSearchTerm.value) {
-        users = props.users.value.filter((usr) =>
+        users = props.users.filter((usr) =>
           usr.fullName.includes(activeSearchTerm.value),
         );
       } else if (props.users) {
@@ -86,6 +86,7 @@ export default {
     return {
       enteredSearchTerm,
       activeSearchTerm,
+      sorting,
       displayedUsers,
       availableUsers,
       updateSearch,
