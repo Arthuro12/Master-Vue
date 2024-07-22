@@ -4,7 +4,7 @@ let timer = null
 export default {
   async auth(context, payload) {
     const mode = payload.mode
-    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`
+    let url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`
 
     if (mode === 'signup') {
       url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`
